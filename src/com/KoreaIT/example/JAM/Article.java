@@ -13,7 +13,7 @@ public class Article extends Object{ // Object - 모든 class의 최상위 class
 		this.body = body;
 	}
 
-	public Article(int id2, String regDate, String updateDate, String title2, String body2) {
+	public Article(int id, String regDate, String updateDate, String title, String body) {
 		this.id = id;
 		this.regDate = regDate;
 		this.updateDate = updateDate;
