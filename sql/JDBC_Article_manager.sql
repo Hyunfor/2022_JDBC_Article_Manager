@@ -12,10 +12,13 @@ CREATE TABLE article(
 
 DESC article;
 
+SELECT * FROM article
+
+#역순 체크
+SELECT * FROM article ORDER BY id DESC
+
 INSERT INTO article
 SET regDate = NOW(),
 updateDate = NOW(),
 title = CONCAT('제목', RAND()),
 `body` = CONCAT('내용', RAND());
-
-SELECT * FROM article;
