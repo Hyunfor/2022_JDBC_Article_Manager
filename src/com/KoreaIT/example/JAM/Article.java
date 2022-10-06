@@ -1,8 +1,9 @@
 package com.KoreaIT.example.JAM;
 
 public class Article extends Object{ // Object - 모든 class의 최상위 class
-	
 	int id;
+	String regDate;
+	String updateDate;
 	String title;
 	String body;
 	
@@ -12,10 +13,20 @@ public class Article extends Object{ // Object - 모든 class의 최상위 class
 		this.body = body;
 	}
 
+	public Article(int id2, String regDate, String updateDate, String title2, String body2) {
+		this.id = id;
+		this.regDate = regDate;
+		this.updateDate = updateDate;
+		this.title = title;
+		this.body = body;
+	}
+
 	@Override
 	public String toString() {
-		return "Article [id=" + id + ", title=" + title + ", body=" + body + "]";
+		return "Article [id=" + id + ", regDate=" + regDate + ", updateDate=" + updateDate + ", title=" + title
+				+ ", body=" + body + "]";
 	}
+
 	
 	
 }
