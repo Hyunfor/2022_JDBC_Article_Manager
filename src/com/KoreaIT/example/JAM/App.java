@@ -18,8 +18,6 @@ public class App {
 	public void run() {
 	System.out.println("== 프로그램 실행 ==");
 		
-		int lastArticleId = 0;
-		
 		Scanner sc = new Scanner(System.in);
 		
 		while (true) {
@@ -63,12 +61,11 @@ public class App {
 
 	private void doAction(Connection conn, Scanner sc, String cmd) {
 		
-		int lastArticleId = 0;
 		
 		if (cmd.equals("article write")) {
 			System.out.println("== 게시물 작성 ==");
 
-//			int id = lastArticleId + 1;
+
 			System.out.printf("제목 : ");
 			String title = sc.nextLine();
 			System.out.printf("내용 : ");
@@ -83,35 +80,6 @@ public class App {
 			sql.append(", body = ? ", body);
 			
 			int id = DBUtil.insert(conn, sql);
-
-//			PreparedStatement pstmt = null;
-//
-//			try {
-//				String sql = "INSERT INTO article";
-//				sql += " SET regDate = NOW()";
-//				sql += ", updateDate = NOW()";
-//				sql += ", title = '" + title + "'";
-//				sql += ", `body` = '" + body + "';";
-//
-//				System.out.println(sql);
-//
-//				pstmt = conn.prepareStatement(sql);
-//
-//				pstmt.executeUpdate();
-//
-//			} catch (SQLException e) {
-//				System.out.println("에러: " + e);
-//			} finally {
-//				try {
-//					if (pstmt != null && !pstmt.isClosed()) {
-//						pstmt.close();
-//					}
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//			}
-
-			lastArticleId++;
 
 			System.out.printf("%d번 글이 생성 되었습니다\n", id);
 
@@ -134,34 +102,34 @@ public class App {
 			
 			DBUtil.update(conn, sql);
 
-//			PreparedStatement pstmt = null;
-//
-//			try {
-//				String sql = "UPDATE article";
-//				sql += " SET updateDate = NOW()";
-//				sql += ", title = '" + title + "'";
-//				sql += ", `body` = '" + body + "'";
-//				sql += " WHERE id = " + id;
-//
-//				System.out.println(sql);
-//
-//				pstmt = conn.prepareStatement(sql);
-//
-//				pstmt.executeUpdate();
-//
-//			} catch (SQLException e) {
-//				System.out.println("에러: " + e);
-//			} finally {
-//				try {
-//					if (pstmt != null && !pstmt.isClosed()) {
-//						pstmt.close();
-//					}
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//			}
-
 			System.out.printf("%d번 글이 수정 되었습니다\n", id);
+			
+		} else if (cmd.startsWith("article delete ")) {
+			int id = Integer.parseInt(cmd.split(" ")[2]);
+
+			SecSql sql = new SecSql();
+
+			sql.append("SELECT COUNT(*)");
+			sql.append("FROM article");
+			sql.append("WHERE id = ?", id);
+
+			int articlesCount = DBUtil.selectRowIntValue(conn, sql);
+
+			if(articlesCount == 0) {
+				System.out.printf("%d번 게시글은 존재하지 않습니다\n", id);
+				return;
+			}
+
+			System.out.printf("== %d번 게시물 삭제 ==\n", id);
+
+			sql = new SecSql();
+
+			sql.append("DELETE FROM article");
+			sql.append("WHERE id = ?", id);
+
+			DBUtil.delete(conn, sql);
+
+			System.out.printf("%d번 글이 삭제 되었습니다\n", id);
 			
 		} else if (cmd.equals("article list")) {
 			System.out.println("== 게시물 리스트 ==");
@@ -181,46 +149,6 @@ public class App {
 			for(Map<String, Object> articleMap : articleListMap) {
 				articles.add(new Article(articleMap)); // Map 데이터 안에 있는   key와  value를 article로 조립
 			}
-
-//			try {
-//				String sql = "SELECT *";
-//				sql += " FROM article";
-//				sql += " ORDER BY id DESC;";
-
-//				System.out.println(sql);
-//
-//				pstmt = conn.prepareStatement(sql);
-//				rs = pstmt.executeQuery();
-//
-//				while (rs.next()) {
-//					int id = rs.getInt("id");
-//					String regDate = rs.getString("regDate");
-//					String updateDate = rs.getString("updateDate");
-//					String title = rs.getString("title");
-//					String body = rs.getString("body");
-//
-//					Article article = new Article(id, regDate, updateDate, title, body);
-//					articles.add(article);
-//				}
-//
-//			} catch (SQLException e) {
-//				System.out.println("에러: " + e);
-//			} finally {
-//				try {
-//					if (rs != null && !rs.isClosed()) {
-//						rs.close();
-//					}
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//				try {
-//					if (pstmt != null && !pstmt.isClosed()) {
-//						pstmt.close();
-//					}
-//				} catch (SQLException e) {
-//					e.printStackTrace();
-//				}
-//			}
 
 			if (articles.size() == 0) {
 				System.out.println("게시물이 없습니다");
