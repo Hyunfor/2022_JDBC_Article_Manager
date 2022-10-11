@@ -35,11 +35,11 @@ public class JDBCSelectTest {
 			rs = pstmt.executeQuery();
 
 			while(rs.next()) { // get로 압축 풀기
-				int id = rs.getInt("id");
-				String regDate = rs.getString("regDate");
-				String updateDate = rs.getString("updateDate");
-				String title = rs.getString("title");
-				String body = rs.getString("body");
+//				int id = rs.getInt("id");
+//				String regDate = rs.getString("regDate");
+//				String updateDate = rs.getString("updateDate");
+//				String title = rs.getString("title");
+//				String body = rs.getString("body");
 				
 				// 데이터 들어있는지 확인
 //				System.out.println(id);
@@ -49,8 +49,8 @@ public class JDBCSelectTest {
 //				System.out.println(body);
 
 				// 압축 풀은 것을 다시 조립
-				Article article = new Article(id, regDate, updateDate, title, body);
-				articles.add(article);
+//				Article article = new Article(id, regDate, updateDate, title, body);
+//				articles.add(article);
 			}
 
 		} catch (ClassNotFoundException e) {
