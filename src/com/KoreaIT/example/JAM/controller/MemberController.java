@@ -3,17 +3,16 @@ package com.KoreaIT.example.JAM.controller;
 import java.sql.Connection;
 import java.util.Scanner;
 
-import com.KoreaIT.example.JAM.util.DBUtil;
-import com.KoreaIT.example.JAM.util.SecSql;
+import com.KoreaIT.example.JAM.service.MemberService;
 
 public class MemberController extends Controller {
-
-	private Connection conn;
+	
+	private MemberService memberService;
 	
 	public MemberController(Connection conn, Scanner sc) {
 		super(sc); // this는 부모에게 상속받더라도 받아오는 변수 이름이 같을 시에는 가까운 것을 바라봄.
 					// super는 부모에게 상속 받는 상황일 시 변수의 이름이 같을 시 부모의 것을 가져옴.
-		this.conn = conn;
+		this.memberService = new MemberService(conn);
 	}
 	public void doJoin(String cmd) {
 		String loginId = null;
@@ -31,14 +30,7 @@ public class MemberController extends Controller {
 				continue;
 			}
 			
-			// 아이디 중복체크 쿼리
-			SecSql sql = new SecSql();
-			
-			sql.append("SELECT COUNT(loginId) > 0");
-			sql.append("FROM `member`");
-			sql.append("WHERE loginId = ?", loginId);
-			
-			boolean isLoginIdDup =  DBUtil.selectRowBooleanValue(conn, sql);
+			boolean isLoginIdDup =  memberService.isLoginIdDup(loginId);
 			
 			if(isLoginIdDup) { // 중복된 아이디가 있는 경우
 				System.out.printf("%s은(는) 이미 사용중인 아이디입니다.\n", loginId);
@@ -89,16 +81,7 @@ public class MemberController extends Controller {
 			break;
 		}
 		
-		SecSql sql = new SecSql();
-		
-		sql.append("INSERT INTO `member`");
-		sql.append("SET regDate = NOW()");
-		sql.append(", updateDate = NOW()");
-		sql.append(", loginId = ?", loginId);
-		sql.append(", loginPw = ?", loginPw);
-		sql.append(", `name` = ?", name);
-		
-		DBUtil.insert(conn, sql);
+		memberService.doJoin(loginId, loginPw, name);
 
 		System.out.printf("%s 회원님, 가입 되었습니다\n", name);
 
