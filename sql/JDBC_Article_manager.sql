@@ -55,6 +55,11 @@ loginId = CONCAT('TestId', RAND()),
 loginPw = CONCAT('TestPw', RAND()),
 `name` = CONCAT('Testname', RAND());
 
+# 아이디 중복 체크
+SELECT COUNT(loginId) > 0
+FROM `member`
+WHERE loginId = loginId;
+
 # article 테이블 조회
 SELECT * FROM article;
 
