@@ -1,16 +1,11 @@
 package com.KoreaIT.example.JAM.controller;
 
 import java.sql.Connection;
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.Scanner;
 
 import com.KoreaIT.example.JAM.Article;
 import com.KoreaIT.example.JAM.service.ArticleService;
-import com.KoreaIT.example.JAM.service.MemberService;
-import com.KoreaIT.example.JAM.util.DBUtil;
-import com.KoreaIT.example.JAM.util.SecSql;
 
 public class ArticleController extends Controller {
 	
@@ -35,29 +30,15 @@ public class ArticleController extends Controller {
 		
 	}
 	
-	public void showList(String cmd) {
-		System.out.println("== 게시물 리스트 ==");
-
-		List<Article> articles = new ArrayList<>();
+	public void showList(String cmd) { 
+		List<Article> articles = articleService.getArticles(); 
 		
-		SecSql sql = new SecSql();
-		
-		sql.append("SELECT *");
-		sql.append(" FROM article");
-		sql.append(" ORDER BY id DESC;"); 
-		
-		List<Map<String, Object>> articleListMap = DBUtil.selectRows(conn, sql);
-		//      key타입,  value 타입 
-		// List에 비해서 Map이 자료를 가져오는 속도가 훨씬 빠름
-		
-		for(Map<String, Object> articleMap : articleListMap) {
-			articles.add(new Article(articleMap)); // Map 데이터 안에 있는   key와  value를 article로 조립
-		}
-
 		if (articles.size() == 0) {
 			System.out.println("게시물이 없습니다");
 			return;
 		}
+		
+		System.out.println("== 게시물 리스트 ==");
 
 		System.out.println("번호	|	제목");
 
@@ -70,22 +51,14 @@ public class ArticleController extends Controller {
 	public void showDatail(String cmd) {
 		int id = Integer.parseInt(cmd.split(" ")[2]);
 
-		SecSql sql = new SecSql();
-
-		sql.append("SELECT *");
-		sql.append("FROM article");
-		sql.append("WHERE id = ?", id);
-
-		Map<String, Object> articleMap = DBUtil.selectRow(conn, sql);
-
-		if (articleMap.isEmpty()) {
-			System.out.printf("%d번 게시글은 존재하지 않습니다\n", id);
+		System.out.printf("== %d번 게시물 상세보기 ==\n", id);
+		
+		Article article = articleService.getArticle(id);
+		
+		if(article == null) {
+			System.out.printf("%d번 게시글은 존재하지 않습니다.\n", id);
 			return;
 		}
-
-		System.out.printf("== %d번 게시물 상세보기 ==\n", id);
-
-		Article article = new Article(articleMap);
 
 		System.out.printf("번호 : %d\n", article.id);
 		System.out.printf("작성날짜 : %s\n", article.regDate);
@@ -93,11 +66,18 @@ public class ArticleController extends Controller {
 		System.out.printf("제목 : %s\n", article.title);
 		System.out.printf("내용 : %s\n", article.body);
 
-		
 	}
 
 	public void doModify(String cmd) {
 		int id = Integer.parseInt(cmd.split(" ")[2]);
+		
+		boolean isArticleExists = articleService.isArticleExists(id);
+		
+		if(isArticleExists == false) {
+			System.out.printf("%d번 게시글은 존재하지 않습니다\n", id);
+			return;
+		}
+		
 		System.out.printf("== %d번 게시물 수정 ==\n", id);
 
 		System.out.printf("수정할 제목 : ");
@@ -114,7 +94,6 @@ public class ArticleController extends Controller {
 	public void doDelete(String cmd) {
 		int id = Integer.parseInt(cmd.split(" ")[2]);
 
-		
 		boolean isArticleExists = articleService.isArticleExists(id);
 		
 		if(isArticleExists == false) {
