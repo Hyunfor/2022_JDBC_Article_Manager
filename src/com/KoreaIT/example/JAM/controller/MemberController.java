@@ -1,19 +1,15 @@
 package com.KoreaIT.example.JAM.controller;
 
-import java.sql.Connection;
-import java.util.Scanner;
-
 import com.KoreaIT.example.JAM.Member;
+import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.service.MemberService;
 
 public class MemberController extends Controller {
 	
 	private MemberService memberService;
 	
-	public MemberController(Connection conn, Scanner sc) {
-		super(sc); // this는 부모에게 상속받더라도 받아오는 변수 이름이 같을 시에는 가까운 것을 바라봄.
-					// super는 부모에게 상속 받는 상황일 시 변수의 이름이 같을 시 부모의 것을 가져옴.
-		this.memberService = new MemberService(conn);
+	public MemberController() {
+		this.memberService = Container.memberService;
 	}
 	public void doJoin(String cmd) {
 		String loginId = null;
@@ -144,7 +140,6 @@ public class MemberController extends Controller {
 			System.out.printf("%s님 환영합니다\n", member.name);
 			break;
 		}
-		
 		
 	}
 
