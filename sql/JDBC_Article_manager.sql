@@ -60,6 +60,10 @@ SELECT COUNT(loginId) > 0
 FROM `member`
 WHERE loginId = loginId;
 
+SELECT COUNT(loginId) > 0
+FROM `member`
+WHERE loginId = 'test3';
+
 # article 테이블 조회
 SELECT * FROM article;
 
