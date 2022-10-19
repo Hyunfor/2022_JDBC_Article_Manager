@@ -13,10 +13,10 @@ import com.KoreaIT.example.JAM.controller.MemberController;
 public class App {
 
 	public void run() {
-	System.out.println("== 프로그램 실행 ==");
+		System.out.println("== 프로그램 실행 ==");
 		
-		Scanner sc = new Scanner(System.in);
-		
+		Container.sc = new Scanner(System.in);
+
 		Container.init();
 		
 		while (true) {
@@ -36,6 +36,7 @@ public class App {
 
 			try {
 				conn = DriverManager.getConnection(url, "root", "");
+				Container.conn = conn;
 				doAction(cmd);
 				
 				if (cmd.equals("exit")) {
@@ -55,7 +56,7 @@ public class App {
 				}
 			}
 		}
-		sc.close();
+			Container.sc.close();
 	}
 
 	private void doAction(String cmd) {

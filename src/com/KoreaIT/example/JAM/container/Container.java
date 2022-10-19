@@ -1,5 +1,6 @@
 package com.KoreaIT.example.JAM.container;
 
+import java.sql.Connection;
 import java.util.Scanner;
 
 import com.KoreaIT.example.JAM.controller.ArticleController;
@@ -22,9 +23,10 @@ public class Container { // 프로그램 실행 후 끄기전까지 오랫동안
 
 	public static Session session;
 	public static Scanner sc;
+	
+	public static Connection conn;
 
 	public static void init() {
-		Container.sc = sc;
 		session = new Session();
 
 		articleDao = new ArticleDao();
