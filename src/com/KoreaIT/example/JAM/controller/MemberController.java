@@ -138,10 +138,20 @@ public class MemberController extends Controller {
 				continue;
 			}	
 			System.out.printf("%s님 환영합니다\n", member.name);
+			
+			Container.session.loginedMemberId = member.id;
+			Container.session.loginedMember = member;
+			
 			break;
 		}
 		
 	}
-
+	public void showProfile(String cmd) {
+		if (Container.session.loginedMemberId == -1) {
+			System.out.println("로그인 상태가 아닙니다.");
+		} else {
+			System.out.println(Container.session.loginedMember.name);
+		}
+	}
 	
 }
