@@ -146,19 +146,22 @@ public class MemberController extends Controller {
 		
 	}
 	
+	public void showProfile(String cmd) {
+		if (Container.session.loginedMemberId == -1) {
+			System.out.println("로그인 상태가 아닙니다.");
+			return;
+		}  
+			System.out.println("아이디 : " + Container.session.loginedMember.loginId);
+			System.out.println("가입일 : " + Container.session.loginedMember.regDate);
+			System.out.println("이름 : " + Container.session.loginedMember.name);
+		
+	}
+	
 	public void doLogout(String cmd) {
 		Container.session.logout();
 
 		System.out.println("로그아웃 되었습니다.");
 		
-	}
-	
-	public void showProfile(String cmd) {
-		if (Container.session.loginedMemberId == -1) {
-			System.out.println("로그인 상태가 아닙니다.");
-		} else {
-			System.out.println(Container.session.loginedMember.name);
-		}
 	}
 	
 	

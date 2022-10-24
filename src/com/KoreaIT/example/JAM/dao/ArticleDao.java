@@ -63,9 +63,11 @@ public class ArticleDao {
 	public Article getArticle(int id) {
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT *");
-		sql.append("FROM article");
-		sql.append("WHERE id = ?", id);
+		sql.append("SELECT A.*, M.name AS writerName");
+		sql.append("FROM article AS A");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON A.memberId = M.id");
+		sql.append("WHERE A.id = ?", id);
 		// article 하나를 가져와서 진행
 		Map<String, Object> articleMap = DBUtil.selectRow(Container.conn, sql);
 		
@@ -79,9 +81,11 @@ public class ArticleDao {
 	public List<Article> getArticles() {
 		SecSql sql = new SecSql();
 		
-		sql.append("SELECT *");
-		sql.append(" FROM article");
-		sql.append(" ORDER BY id DESC;"); 
+		sql.append("SELECT A.*, M.name AS writerName");
+		sql.append("FROM article AS A");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON A.memberId = M.id");
+		sql.append("ORDER BY id DESC;");
 		// article 여러개를 가져와서 진행
 		List<Map<String, Object>> articleListMap = DBUtil.selectRows(Container.conn, sql);
 		//      key타입,  value 타입 

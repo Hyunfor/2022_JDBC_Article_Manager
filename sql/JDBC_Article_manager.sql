@@ -76,3 +76,71 @@ SELECT * FROM article;
 
 # member 테이블 조회
 SELECT * FROM `member`;
+
+# article 데이터 추가
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+title = 'test1',
+`body` = 'test1';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+title = 'test1',
+`body` = 'test1';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+title = 'test2',
+`body` = 'test2';
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+title = 'test2',
+`body` = 'test2';
+
+# member 데이터 추가
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test1',
+loginPw = 'test1',
+`name` = '스테이크';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test2',
+loginPw = 'test2',
+`name` = '파스타';
+
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+ORDER BY id DESC;
+
+UPDATE article 
+SET hit = hit + 1
+
+#
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.id = 2;
+
+#게시물 작성시 작성자의 회원번호를 저장하도록
+ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
+
+#조회수 기능 추가
+ALTER TABLE article ADD COLUMN hit INT UNSIGNED NOT NULL;
+
+# 아이디 중복 체크
