@@ -9,8 +9,9 @@ public class Article extends Object{ // Object - 모든 class의 최상위 class
 	public LocalDateTime updateDate;
 	public String title;
 	public String body;
+	public int memberId;
 
-	public Article(int id, LocalDateTime regDate, LocalDateTime updateDate, String title, String body) {
+	public Article(int id, LocalDateTime regDate, LocalDateTime updateDate, String title, String body, String name) {
 		this.id = id;
 		this.regDate = regDate;
 		this.updateDate = updateDate;
@@ -32,6 +33,5 @@ public class Article extends Object{ // Object - 모든 class의 최상위 class
 				+ ", body=" + body + "]";
 	}
 
-	
 	
 }

@@ -37,6 +37,9 @@ CREATE TABLE `member` (
 	`name` VARCHAR(50) NOT NULL
 );
 
+#게시물 작성시 작성자의 회원번호를 저장하도록
+ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
+
 #역순 체크
 SELECT * FROM article ORDER BY id DESC;
 

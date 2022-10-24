@@ -5,6 +5,8 @@ import java.util.List;
 import com.KoreaIT.example.JAM.Article;
 import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.service.ArticleService;
+import com.KoreaIT.example.JAM.service.MemberService;
+import com.KoreaIT.example.JAM.session.Session;
 
 public class ArticleController extends Controller {
 	
@@ -28,7 +30,9 @@ public class ArticleController extends Controller {
 		System.out.printf("내용 : ");
 		String body = sc.nextLine();
 		
-		int id = articleService.doWrite(title, body);
+		int memberId = Container.session.loginedMemberId;
+		
+		int id = articleService.doWrite(memberId, title, body);
 
 		System.out.printf("%d번 글이 생성 되었습니다\n", id);
 		
@@ -44,10 +48,10 @@ public class ArticleController extends Controller {
 		
 		System.out.println("== 게시물 리스트 ==");
 
-		System.out.println("번호	|	제목");
+		System.out.println("번호	|	제목	|	작성자");
 
 		for (Article article : articles) {
-			System.out.printf("%d	|	%s\n", article.id, article.title);
+			System.out.printf("%d	|	%s	|	%s\n", article.id, article.title);
 		}
 		
 	}
