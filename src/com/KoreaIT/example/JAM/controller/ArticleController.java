@@ -48,10 +48,10 @@ public class ArticleController extends Controller {
 		
 		System.out.println("== 게시물 리스트 ==");
 
-		System.out.println("번호	|	제목	|	작성자	|	작성일");
+		System.out.println("번호	|	제목	|	작성자	|	조회수	|	작성일");
 
 		for (Article article : articles) {
-			System.out.printf("%d	|	%s	|	%s	|	%s\n", article.id, article.title, article.writerName, article.updateDate);
+			System.out.printf("%d	|	%s	|	%s	|	%d	|	%s\n", article.id, article.title, article.writerName, article.hit,article.updateDate);
 		}
 		
 	}
@@ -59,6 +59,9 @@ public class ArticleController extends Controller {
 	public void showDetail(String cmd) {
 	
 		int id = Integer.parseInt(cmd.split(" ")[2]);
+		
+		articleService.increaseHit(id);
+		
 		Article article = articleService.getArticle(id);
 		
 		if(article == null) {
@@ -74,6 +77,7 @@ public class ArticleController extends Controller {
 		System.out.printf("작성자 : %s\n", article.writerName);
 		System.out.printf("제목 : %s\n", article.title);
 		System.out.printf("내용 : %s\n", article.body);
+		System.out.printf("조회수 : %s\n", article.hit);
 
 	}
 

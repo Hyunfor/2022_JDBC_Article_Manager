@@ -130,6 +130,54 @@ ORDER BY id DESC;
 UPDATE article 
 SET hit = hit + 1
 
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+title = 'test1',
+`body` = 'test1',
+hit = 5;
+
+# article 데이터 추가
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+title = 'test2',
+`body` = 'test2',
+hit = 15;
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 2,
+title = 'test3',
+`body` = 'test3',
+hit = 17;
+
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+memberId = 1,
+title = 'test4',
+`body` = 'test4',
+hit = 20;
+
+# member 데이터 추가
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test1',
+loginPw = 'test1',
+`name` = '김철수';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test2',
+loginPw = 'test2',
+`name` = '김영희';
+
 #
 SELECT A.*, M.name AS writerName 
 FROM article AS A
