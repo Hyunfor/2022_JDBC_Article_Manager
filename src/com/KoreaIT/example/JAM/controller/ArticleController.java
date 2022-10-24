@@ -5,8 +5,6 @@ import java.util.List;
 import com.KoreaIT.example.JAM.Article;
 import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.service.ArticleService;
-import com.KoreaIT.example.JAM.service.MemberService;
-import com.KoreaIT.example.JAM.session.Session;
 
 public class ArticleController extends Controller {
 	
@@ -90,10 +88,15 @@ public class ArticleController extends Controller {
 		
 		int id = Integer.parseInt(cmd.split(" ")[2]);
 		
-		boolean isArticleExists = articleService.isArticleExists(id);
+		Article article = articleService.getArticle(id);
 		
-		if(isArticleExists == false) {
+		if(article == null) {
 			System.out.printf("%d번 게시글은 존재하지 않습니다\n", id);
+			return;
+		}
+		
+		if(article.memberId != Container.session.loginedMemberId) {
+			System.out.println("해당 게시글에 대한 권한이 없습니다.");
 			return;
 		}
 		
@@ -111,12 +114,23 @@ public class ArticleController extends Controller {
 	}
 
 	public void doDelete(String cmd) {
+		
+		if (Container.session.isLogined() == false) {
+			System.out.println("로그인 후 이용해주세요");
+			return;
+		}
+		
 		int id = Integer.parseInt(cmd.split(" ")[2]);
 
-		boolean isArticleExists = articleService.isArticleExists(id);
+		Article article = articleService.getArticle(id); // modify와 기능 동일
 		
-		if(isArticleExists == false) {
+		if(article == null) { // modify와 기능 동일
 			System.out.printf("%d번 게시글은 존재하지 않습니다\n", id);
+			return;
+		}
+		
+		if(article.memberId != Container.session.loginedMemberId) { // modify와 기능 동일
+			System.out.println("해당 게시글에 대한 권한이 없습니다.");
 			return;
 		}
 
