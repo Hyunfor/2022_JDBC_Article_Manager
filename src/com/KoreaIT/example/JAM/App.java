@@ -14,6 +14,7 @@ public class App {
 
 	public void run() {
 		System.out.println("== 프로그램 실행 ==");
+		System.out.println("== 프로그램 실행 ==");
 		
 		Container.sc = new Scanner(System.in);
 
