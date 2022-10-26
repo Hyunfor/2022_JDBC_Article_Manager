@@ -14,7 +14,6 @@ public class App {
 
 	public void run() {
 		System.out.println("== 프로그램 실행 ==");
-		System.out.println("== 프로그램 실행 ==");
 		
 		Container.sc = new Scanner(System.in);
 
@@ -81,7 +80,7 @@ public class App {
 				articleController.doModify(cmd);
 		} else if (cmd.startsWith("article delete ")) {
 				articleController.doDelete(cmd);
-		} else if (cmd.equals("article list")) {
+		} else if (cmd.startsWith("article list")) {
 				articleController.showList(cmd);
 		}
 

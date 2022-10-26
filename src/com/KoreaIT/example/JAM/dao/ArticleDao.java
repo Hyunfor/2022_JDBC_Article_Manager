@@ -110,5 +110,46 @@ public class ArticleDao {
 		DBUtil.update(Container.conn, sql);
 		
 	}
+
+	public List<Article> getForPrintArticles(Map<String, Object> args) {
+		SecSql sql = new SecSql();
+		
+		String searchKeyword = "";
+		int limitFrom = -1;
+		int limtiTake = -1;
+		
+		if(args.containsKey("searchKeyword")) { // map은 get(key)값으로 꺼내옴. key 중복 되면 안됨
+			searchKeyword = (String) args.get("searchKeyword"); // 기존형태로 가져와야함
+		}
+		
+		if(args.containsKey("limitFrom")) { 
+			limitFrom = (int) args.get("limitFrom"); 
+		}
+		
+		if(args.containsKey("limitTake")) { 
+			limtiTake = (int) args.get("limitTake"); 
+		}
+		
+		sql.append("SELECT A.*, M.name AS writerName");
+		sql.append("FROM article AS A");
+		sql.append("INNER JOIN `member` AS M");
+		sql.append("ON A.memberId = M.id");
+		if(searchKeyword.length() > 0) { // 검색어가 입력된 경우 - 참이면 쿼리 생략
+			sql.append("WHERE A.title LIKE CONCAT('%', ? ,'%')", searchKeyword);
+		}
+		sql.append("ORDER BY id DESC");
+		if(limitFrom != -1) { //페이징 값이 넘어오 경우
+			sql.append("LIMIT ?, ?", limitFrom, limtiTake);
+		}
+		
+		List<Map<String, Object>> articleListMap = DBUtil.selectRows(Container.conn, sql);
+
+		List<Article> articles = new ArrayList<>(); 
+		
+		for(Map<String, Object> articleMap : articleListMap) {
+			articles.add(new Article(articleMap)); 
+		}
+		return articles;
+	}
 	
 }

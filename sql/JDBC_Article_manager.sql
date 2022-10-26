@@ -40,6 +40,9 @@ CREATE TABLE `member` (
 #게시물 작성시 작성자의 회원번호를 저장하도록
 ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 
+# article 테이블에 조회수 컬럼 추가
+ALTER TABLE article ADD COLUMN hit INT UNSIGNED NOT NULL;
+
 #역순 체크
 SELECT * FROM article ORDER BY id DESC;
 
