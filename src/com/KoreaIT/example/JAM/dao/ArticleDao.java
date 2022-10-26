@@ -138,7 +138,7 @@ public class ArticleDao {
 			sql.append("WHERE A.title LIKE CONCAT('%', ? ,'%')", searchKeyword);
 		}
 		sql.append("ORDER BY id DESC");
-		if(limitFrom != -1) { //페이징 값이 넘어오 경우
+		if(limitFrom != -1) { //페이징 값이 넘어오는 경우
 			sql.append("LIMIT ?, ?", limitFrom, limtiTake);
 		}
 		

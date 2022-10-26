@@ -8,7 +8,7 @@ import com.KoreaIT.example.JAM.service.ArticleService;
 
 public class ArticleController extends Controller {
 	
-	private ArticleService articleService;   
+	private ArticleService articleService;
 	
 	public ArticleController() {
 		articleService = Container.articleService;

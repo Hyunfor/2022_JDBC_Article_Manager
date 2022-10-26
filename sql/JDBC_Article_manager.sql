@@ -130,6 +130,29 @@ INNER JOIN `member` AS M
 ON A.memberId = M.id
 ORDER BY id DESC;
 
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE CONCAT('%', ? ,'%')
+ORDER BY id DESC;
+
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE "%1%"
+ORDER BY id DESC
+LIMIT 0, 10;
+
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE "%e%"
+ORDER BY id DESC
+LIMIT 0, 10;
+
 UPDATE article 
 SET hit = hit + 1
 
