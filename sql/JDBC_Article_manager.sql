@@ -153,6 +153,18 @@ WHERE A.title LIKE "%e%"
 ORDER BY id DESC
 LIMIT 0, 10;
 
+# 쿼리문 수정할 것
+SELECT *
+{
+A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE "%e%"
+ORDER BY id DESC
+}
+LIMIT 0, 10;
+
 UPDATE article 
 SET hit = hit + 1
 

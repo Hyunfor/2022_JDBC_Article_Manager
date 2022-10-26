@@ -130,16 +130,19 @@ public class ArticleDao {
 			limtiTake = (int) args.get("limitTake"); 
 		}
 		
-		sql.append("SELECT A.*, M.name AS writerName");
-		sql.append("FROM article AS A");
-		sql.append("INNER JOIN `member` AS M");
-		sql.append("ON A.memberId = M.id");
-		if(searchKeyword.length() > 0) { // 검색어가 입력된 경우 - 참이면 쿼리 생략
-			sql.append("WHERE A.title LIKE CONCAT('%', ? ,'%')", searchKeyword);
-		}
-		sql.append("ORDER BY id DESC");
-		if(limitFrom != -1) { //페이징 값이 넘어오는 경우
+		sql.append("SELECT *");
+		sql.append("FROM (");
+		sql.append("SELECT a.*, m.name AS writerName");
+		sql.append("FROM article AS a");
+		sql.append("INNER JOIN `member` AS m");
+		sql.append("ON a.memberId = m.id");
+		sql.append("ORDER BY a.id DESC");
+		if(limitFrom != -1) {
 			sql.append("LIMIT ?, ?", limitFrom, limtiTake);
+		}
+		sql.append(") A");
+		if(searchKeyword.length() > 0) {
+			sql.append("WHERE title LIKE CONCAT('%', ?, '%')", searchKeyword);
 		}
 		
 		List<Map<String, Object>> articleListMap = DBUtil.selectRows(Container.conn, sql);
