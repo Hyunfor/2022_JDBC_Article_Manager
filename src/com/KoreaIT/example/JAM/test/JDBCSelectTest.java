@@ -34,7 +34,7 @@ public class JDBCSelectTest {
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 
-			while(rs.next()) { // get로 압축 풀기
+			while (rs.next()) { // get로 압축 풀기
 
 			}
 

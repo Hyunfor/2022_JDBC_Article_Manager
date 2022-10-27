@@ -16,8 +16,8 @@ public class JDBCInserttTest {
 
 			conn = DriverManager.getConnection(url, "root", "");
 
-			// 쿼리문 
-			
+			// 쿼리문
+
 			String sql = "INSERT INTO article";
 			sql += " SET regDate = NOW()";
 			sql += ", updateDate = NOW()";

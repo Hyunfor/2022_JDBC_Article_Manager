@@ -5,7 +5,7 @@ import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.dao.MemberDao;
 
 public class MemberService {
-	
+
 	private MemberDao memberDao;
 
 	public MemberService() {
@@ -17,7 +17,7 @@ public class MemberService {
 	}
 
 	public int doJoin(String loginId, String loginPw, String name) {
-	
+
 		return memberDao.doJoin(loginId, loginPw, name);
 	}
 

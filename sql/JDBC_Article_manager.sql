@@ -192,3 +192,37 @@ ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 ALTER TABLE article ADD COLUMN hit INT UNSIGNED NOT NULL;
 
 # 아이디 중복 체크
+
+
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE CONCAT('%', ? ,'%')
+ORDER BY id DESC;
+
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE "%1%"
+ORDER BY id DESC
+LIMIT 0, 10;
+
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE "%e%"
+ORDER BY id DESC
+LIMIT 0, 10;
+
+# 쿼리문 수정할 것
+SELECT *
+FROM (
+	SELECT a.*, m.name AS writerName
+	FROM article AS A
+	INNER JOIN `member` AS M
+	ON A.memberId = M.id
+	ORDER BY a.id DESC
+) A WHERE title LIKE CONCAT('%', ?, '%');

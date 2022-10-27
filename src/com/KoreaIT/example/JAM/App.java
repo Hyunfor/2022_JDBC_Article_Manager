@@ -9,16 +9,15 @@ import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.controller.ArticleController;
 import com.KoreaIT.example.JAM.controller.MemberController;
 
-
 public class App {
 
 	public void run() {
 		System.out.println("== 프로그램 실행 ==");
-		
+
 		Container.sc = new Scanner(System.in);
 
 		Container.init();
-		
+
 		while (true) {
 			System.out.printf("명령어) ");
 			String cmd = Container.sc.nextLine().trim();
@@ -38,7 +37,7 @@ public class App {
 				conn = DriverManager.getConnection(url, "root", "");
 				Container.conn = conn;
 				doAction(cmd);
-				
+
 				if (cmd.equals("exit")) {
 					System.out.println("프로그램을 종료합니다");
 					break;
@@ -56,32 +55,32 @@ public class App {
 				}
 			}
 		}
-			Container.sc.close();
+		Container.sc.close();
 	}
 
 	private void doAction(String cmd) {
-		
+
 		MemberController memberController = Container.memberController;
 		ArticleController articleController = Container.articleController;
-		
+
 		if (cmd.equals("member join")) {
 			memberController.doJoin(cmd);
-		}  else if (cmd.equals("member login")) {
+		} else if (cmd.equals("member login")) {
 			memberController.doLogin(cmd);
 		} else if (cmd.equals("member logout")) {
 			memberController.doLogout(cmd);
 		} else if (cmd.equals("member profile")) {
 			memberController.showProfile(cmd);
 		} else if (cmd.equals("article write")) {
-				articleController.doWrite(cmd);
+			articleController.doWrite(cmd);
 		} else if (cmd.startsWith("article detail ")) {
-				articleController.showDetail(cmd);
+			articleController.showDetail(cmd);
 		} else if (cmd.startsWith("article modify ")) {
-				articleController.doModify(cmd);
+			articleController.doModify(cmd);
 		} else if (cmd.startsWith("article delete ")) {
-				articleController.doDelete(cmd);
-		} else if (cmd.equals("article list")) {
-				articleController.showList(cmd);
+			articleController.doDelete(cmd);
+		} else if (cmd.startsWith("article list")) {
+			articleController.showList(cmd);
 		}
 
 	}

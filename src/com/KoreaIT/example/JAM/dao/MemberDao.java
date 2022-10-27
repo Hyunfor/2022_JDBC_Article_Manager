@@ -8,34 +8,33 @@ import com.KoreaIT.example.JAM.util.DBUtil;
 import com.KoreaIT.example.JAM.util.SecSql;
 
 public class MemberDao {
-	
 
 	public MemberDao() {
-		
+
 	}
-	
+
 	public int doJoin(String loginId, String loginPw, String name) {
-		
+
 		SecSql sql = new SecSql();
-		
+
 		sql.append("INSERT INTO `member`");
 		sql.append("SET regDate = NOW()");
 		sql.append(", updateDate = NOW()");
 		sql.append(", loginId = ?", loginId);
 		sql.append(", loginPw = ?", loginPw);
 		sql.append(", `name` = ?", name);
-		
+
 		return DBUtil.insert(Container.conn, sql);
 	}
-	
+
 	public boolean isLoginIdDup(String loginId) {
 		// 아이디 중복체크 쿼리
 		SecSql sql = new SecSql();
-					
+
 		sql.append("SELECT COUNT(loginId) > 0");
 		sql.append("FROM `member`");
 		sql.append("WHERE loginId = ?", loginId);
-					
+
 		return DBUtil.selectRowBooleanValue(Container.conn, sql);
 	}
 
