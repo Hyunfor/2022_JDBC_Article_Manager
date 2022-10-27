@@ -113,6 +113,7 @@ public class ArticleDao {
 
 	public List<Article> getForPrintArticles(Map<String, Object> args) {
 		SecSql sql = new SecSql();
+<<<<<<< HEAD
 
 		String searchKeyword = "";
 		int limitFrom = -1;
@@ -130,6 +131,25 @@ public class ArticleDao {
 			limitTake = (int) args.get("limitTake");
 		}
 
+=======
+		
+		String searchKeyword = "";
+		int limitFrom = -1;
+		int limtiTake = -1;
+		
+		if(args.containsKey("searchKeyword")) { // map은 get(key)값으로 꺼내옴. key 중복 되면 안됨
+			searchKeyword = (String) args.get("searchKeyword"); // 기존형태로 가져와야함
+		}
+		
+		if(args.containsKey("limitFrom")) { 
+			limitFrom = (int) args.get("limitFrom"); 
+		}
+		
+		if(args.containsKey("limitTake")) { 
+			limtiTake = (int) args.get("limitTake"); 
+		}
+		
+>>>>>>> 57db209be40c2e25311e74d72bb11adf77f0e02d
 		sql.append("SELECT *");
 		sql.append("FROM (");
 		sql.append("SELECT a.*, m.name AS writerName");
@@ -138,12 +158,17 @@ public class ArticleDao {
 		sql.append("ON a.memberId = m.id");
 		sql.append("ORDER BY a.id DESC");
 		if(limitFrom != -1) {
+<<<<<<< HEAD
 			sql.append("LIMIT ?, ?", limitFrom, limitTake);
+=======
+			sql.append("LIMIT ?, ?", limitFrom, limtiTake);
+>>>>>>> 57db209be40c2e25311e74d72bb11adf77f0e02d
 		}
 		sql.append(") A");
 		if(searchKeyword.length() > 0) {
 			sql.append("WHERE title LIKE CONCAT('%', ?, '%')", searchKeyword);
 		}
+<<<<<<< HEAD
 
 		List<Map<String, Object>> articleListMap = DBUtil.selectRows(Container.conn, sql);
 
@@ -155,4 +180,17 @@ public class ArticleDao {
 		return articles;
 	}
 
+=======
+		
+		List<Map<String, Object>> articleListMap = DBUtil.selectRows(Container.conn, sql);
+
+		List<Article> articles = new ArrayList<>(); 
+		
+		for(Map<String, Object> articleMap : articleListMap) {
+			articles.add(new Article(articleMap)); 
+		}
+		return articles;
+	}
+	
+>>>>>>> 57db209be40c2e25311e74d72bb11adf77f0e02d
 }

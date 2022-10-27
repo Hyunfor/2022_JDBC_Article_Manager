@@ -35,6 +35,7 @@ public class ArticleController extends Controller {
 		System.out.printf("%d번 글이 생성 되었습니다\n", id);
 
 	}
+<<<<<<< HEAD
 
 	public void showList(String cmd) {
 		String[] cmdBits = cmd.split(" ");
@@ -54,6 +55,28 @@ public class ArticleController extends Controller {
 
 		List<Article> articles = articleService.getForPrintArticles(page, itemsInAPage, searchKeyword);
 
+=======
+	
+	public void showList(String cmd) { 
+		
+		String[] cmdBits = cmd.split(" ");
+		
+		int page = 1;
+		String searchKeyword = "";
+		
+		if(cmdBits.length >= 3) {
+			page = Integer.parseInt(cmdBits[2]);
+		}
+		
+		if(cmdBits.length >= 4) { // 검색어 까지 입력이 된 경우
+			searchKeyword = cmdBits[3];
+		}
+		
+		int itemsInAPage = 10; // 한페이지에서 보이는 게시글 수 
+		
+		List<Article> articles = articleService.getForPrintArticles(page, itemsInAPage, searchKeyword); 
+		
+>>>>>>> 57db209be40c2e25311e74d72bb11adf77f0e02d
 		if (articles.size() == 0) {
 			System.out.println("게시물이 없습니다");
 			return;

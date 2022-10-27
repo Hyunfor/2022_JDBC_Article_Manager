@@ -40,6 +40,9 @@ CREATE TABLE `member` (
 #게시물 작성시 작성자의 회원번호를 저장하도록
 ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 
+# article 테이블에 조회수 컬럼 추가
+ALTER TABLE article ADD COLUMN hit INT UNSIGNED NOT NULL;
+
 #역순 체크
 SELECT * FROM article ORDER BY id DESC;
 
@@ -126,6 +129,41 @@ FROM article AS A
 INNER JOIN `member` AS M
 ON A.memberId = M.id
 ORDER BY id DESC;
+
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE CONCAT('%', ? ,'%')
+ORDER BY id DESC;
+
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE "%1%"
+ORDER BY id DESC
+LIMIT 0, 10;
+
+SELECT A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE "%e%"
+ORDER BY id DESC
+LIMIT 0, 10;
+
+# 쿼리문 수정할 것
+SELECT *
+{
+A.*, M.name AS writerName 
+FROM article AS A
+INNER JOIN `member` AS M
+ON A.memberId = M.id
+WHERE A.title LIKE "%e%"
+ORDER BY id DESC
+}
+LIMIT 0, 10;
 
 UPDATE article 
 SET hit = hit + 1
