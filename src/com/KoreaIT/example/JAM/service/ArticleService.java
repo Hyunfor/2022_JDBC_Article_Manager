@@ -47,16 +47,6 @@ public class ArticleService {
 	public List<Article> getForPrintArticles(int page, int itemsInAPage, String searchKeyword) {
 		int limitFrom = (page - 1) * itemsInAPage;
 		int limitTake = itemsInAPage;
-<<<<<<< HEAD
-
-		Map<String, Object> args = new HashMap<>();
-		args.put("searchKeyword", searchKeyword);
-		args.put("limitFrom", limitFrom);
-		args.put("limitTake", limitTake);
-
-		return articleDao.getForPrintArticles(args);
-	}
-=======
 		
 		Map<String, Object> args = new HashMap<>(); // 실질적으로 사용할것은 Hash, Map은 담아두는 용도
 		args.put("searchKeyword", searchKeyword); // 변수명과 키 이름이 동일한게 편함 , 중복은 불가
@@ -64,10 +54,7 @@ public class ArticleService {
 		args.put("limitTake", limitTake);
  	
 		return articleDao.getForPrintArticles(args);
+
 	}
 	
-	
-
->>>>>>> 57db209be40c2e25311e74d72bb11adf77f0e02d
-
 }

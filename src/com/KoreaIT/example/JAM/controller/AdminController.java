@@ -1,5 +1,6 @@
 package com.KoreaIT.example.JAM.controller;
 
+import com.KoreaIT.example.JAM.dto.AdminDto;
 import com.KoreaIT.example.JAM.service.AdminService;
 
 public class AdminController {
