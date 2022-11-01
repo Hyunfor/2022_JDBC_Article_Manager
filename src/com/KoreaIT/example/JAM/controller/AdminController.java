@@ -1,6 +1,7 @@
 package com.KoreaIT.example.JAM.controller;
 
 import com.KoreaIT.example.JAM.dto.AdminDto;
+import com.KoreaIT.example.JAM.dto.MemberDto;
 import com.KoreaIT.example.JAM.service.AdminService;
 
 public class AdminController {
@@ -39,7 +40,7 @@ public class AdminController {
 	 public ModelAndView admin_member_forced_eviction(String user_id) throws Exception {
 	        
 	        //유저의 아이디를 삭제 (강제탈퇴) 시키기위해서 dto에 담는다.
-	        MemberDTO dto = new MemberDTO();
+	        MemberDto dto = new MemberDto();
 	        dto.setUser_id(user_id);
 	        
 	        //회원탈퇴 체크를 하기위한 메소드, 탈퇴 시키려는 회원의 아이디가 있는지 검사한후에 result 변수에 저장한다.
