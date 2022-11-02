@@ -64,11 +64,11 @@ public class ArticleController extends Controller {
 
 		System.out.println("== 게시물 리스트 ==");
 
-		System.out.println("번호	|	제목	|	작성자	|	조회수	|	작성일");
+		System.out.println("번호	|	제목	|	작성자	|	조회수	|	추천수	|	작성일");
 
 		for (Article article : articles) {
-			System.out.printf("%d	|	%s	|	%s	|	%d	|	%s\n", article.id, article.title, article.writerName,
-					article.hit, article.updateDate);
+			System.out.printf("%d	|	%s	|	%s	|	%d	|	%d	|	%s\n", article.id, article.title, article.writerName,
+					article.hit, article.rec, article.updateDate);
 		}
 
 	}
@@ -95,6 +95,7 @@ public class ArticleController extends Controller {
 		System.out.printf("제목 : %s\n", article.title);
 		System.out.printf("내용 : %s\n", article.body);
 		System.out.printf("조회수 : %s\n", article.hit);
+		System.out.printf("추천수 : %s\n", article.rec);
 
 	}
 

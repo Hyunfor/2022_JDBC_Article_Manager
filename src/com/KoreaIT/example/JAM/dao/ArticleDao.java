@@ -25,6 +25,7 @@ public class ArticleDao {
 		sql.append(", title = ? ", title);
 		sql.append(", body = ? ", body);
 		sql.append(", hit = ? ", 0);
+		sql.append(", rec = ? ", 0);
 
 		return DBUtil.insert(Container.conn, sql);
 	}
@@ -105,6 +106,17 @@ public class ArticleDao {
 
 		sql.append("UPDATE article");
 		sql.append("SET hit = hit + 1");
+		sql.append("WHERE id = ?", id);
+
+		DBUtil.update(Container.conn, sql);
+
+	}
+	
+	public void increaseRec(int id) {
+		SecSql sql = new SecSql();
+
+		sql.append("UPDATE article");
+		sql.append("SET rec = rec + 1");
 		sql.append("WHERE id = ?", id);
 
 		DBUtil.update(Container.conn, sql);

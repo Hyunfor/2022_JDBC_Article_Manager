@@ -229,6 +229,15 @@ ALTER TABLE article ADD COLUMN memberId INT UNSIGNED NOT NULL AFTER updateDate;
 #조회수 기능 추가
 ALTER TABLE article ADD COLUMN hit INT UNSIGNED NOT NULL;
 
+#추천수 기능 추가
+ALTER TABLE article ADD COLUMN rec INT UNSIGNED NOT NULL;
+
+UPDATE article 
+SET hit = hit + 1
+
+UPDATE article 
+SET rec = rec + 1
+
 # 아이디 중복 체크
 
 

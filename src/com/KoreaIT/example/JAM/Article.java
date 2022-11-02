@@ -12,6 +12,7 @@ public class Article extends Object { // Object - 모든 class의 최상위 clas
 	public String body;
 	public String writerName;
 	public int hit;
+	public int rec;
 
 	public Article(Map<String, Object> articleMap) { // 압축 풀기
 		this.id = (int) articleMap.get("id"); // 형변환 해줘야함.
@@ -22,13 +23,15 @@ public class Article extends Object { // Object - 모든 class의 최상위 clas
 		this.body = (String) articleMap.get("body");
 		this.writerName = (String) articleMap.get("writerName");
 		this.hit = (int) articleMap.get("hit");
+		this.rec = (int) articleMap.get("rec");
 
 	}
 
 	@Override
 	public String toString() {
 		return "Article [id=" + id + ", regDate=" + regDate + ", updateDate=" + updateDate + ", memberId=" + memberId
-				+ ", title=" + title + ", body=" + body + ", writerName=" + writerName + ", hit=" + hit + "]";
+				+ ", title=" + title + ", body=" + body + ", writerName=" + writerName + ", hit=" + hit + ", rec=" + rec
+				+ "]";
 	}
 
 }

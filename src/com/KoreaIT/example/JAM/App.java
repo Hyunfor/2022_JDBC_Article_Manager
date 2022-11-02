@@ -78,15 +78,12 @@ public class App {
 		} else if (cmd.startsWith("article modify ")) {
 			articleController.doModify(cmd);
 		} else if (cmd.startsWith("article delete ")) {
-<<<<<<< HEAD
 			articleController.doDelete(cmd);
 		} else if (cmd.startsWith("article list")) {
 			articleController.showList(cmd);
-=======
 				articleController.doDelete(cmd);
 		} else if (cmd.startsWith("article list")) {
 				articleController.showList(cmd);
->>>>>>> 57db209be40c2e25311e74d72bb11adf77f0e02d
 		}
 
 	}
