@@ -17,6 +17,7 @@ public class MemberController extends Controller {
 		String loginPw = null;
 		String loginPwChk = null;
 		String name = null;
+		String address = null;
 		System.out.println("== 회원가입 ==");
 
 		while (true) {
@@ -78,8 +79,19 @@ public class MemberController extends Controller {
 			}
 			break;
 		}
+		
+		while (true) {
+			System.out.printf("주소 : ");
+			address = sc.nextLine().trim();
 
-		memberService.doJoin(loginId, loginPw, name);
+			if (address.length() == 0) {
+				System.out.println("주소를 입력해주세요");
+				continue;
+			}
+			break;
+		}
+
+		memberService.doJoin(loginId, loginPw, name, address);
 
 		System.out.printf("%s 회원님, 가입 되었습니다\n", name);
 

@@ -13,16 +13,16 @@ public class MemberDao {
 
 	}
 
-	public int doJoin(String loginId, String loginPw, String name) {
+	public int doJoin(String loginId, String loginPw, String name, String address) {
 
 		SecSql sql = new SecSql();
-
 		sql.append("INSERT INTO `member`");
 		sql.append("SET regDate = NOW()");
 		sql.append(", updateDate = NOW()");
 		sql.append(", loginId = ?", loginId);
 		sql.append(", loginPw = ?", loginPw);
 		sql.append(", `name` = ?", name);
+		sql.append(", address = ?", address);
 
 		return DBUtil.insert(Container.conn, sql);
 	}

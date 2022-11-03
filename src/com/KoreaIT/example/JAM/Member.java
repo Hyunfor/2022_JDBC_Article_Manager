@@ -10,15 +10,17 @@ public class Member extends Object { // Object - 모든 class의 최상위 class
 	public String loginId;
 	public String loginPw;
 	public String name;
+	public String address;
 
 	public Member(int id, LocalDateTime regDate, LocalDateTime updateDate, String loginId, String loginPw,
-			String name) {
+			String name, String address) {
 		this.id = id;
 		this.regDate = regDate;
 		this.updateDate = updateDate;
 		this.loginId = loginId;
 		this.loginPw = loginPw;
 		this.name = name;
+		this.address = address;
 	}
 
 	public Member(Map<String, Object> MemberMap) {
@@ -28,12 +30,13 @@ public class Member extends Object { // Object - 모든 class의 최상위 class
 		this.loginId = (String) MemberMap.get("loginId");
 		this.loginPw = (String) MemberMap.get("loginPw");
 		this.name = (String) MemberMap.get("name");
+		this.address = (String)MemberMap.get("address");
 	}
 
 	@Override
 	public String toString() {
 		return "Member [id=" + id + ", regDate=" + regDate + ", updateDate=" + updateDate + ", loginId=" + loginId
-				+ ", loginPw=" + loginPw + ", name=" + name + "]";
+				+ ", loginPw=" + loginPw + ", name=" + name + ", address=" + address + "]";
 	}
 
 }
