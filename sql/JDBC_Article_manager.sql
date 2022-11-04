@@ -24,17 +24,8 @@ CREATE TABLE `member` (
 	updateDate DATETIME NOT NULL,
 	loginId VARCHAR(20) NOT NULL,
 	loginPw VARCHAR(50) NOT NULL,
-	loginPwC VARCHAR(50) NOT NULL,
-	`name` VARCHAR(50) NOT NULL
-);
-
-CREATE TABLE `member` (
-	id INT UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	regDate DATETIME NOT NULL,
-	updateDate DATETIME NOT NULL,
-	loginId VARCHAR(20) NOT NULL,
-	loginPw VARCHAR(50) NOT NULL,
-	`name` VARCHAR(50) NOT NULL
+	`name` VARCHAR(50) NOT NULL,
+	address VARCHAR(100) NOT NULL
 );
 
 #게시물 작성시 작성자의 회원번호를 저장하도록
@@ -237,6 +228,12 @@ SET hit = hit + 1
 
 UPDATE article 
 SET rec = rec + 1
+
+# article 테이블 조회
+SELECT * FROM article;
+
+# member 테이블 조회
+SELECT * FROM `member`;
 
 # 아이디 중복 체크
 
