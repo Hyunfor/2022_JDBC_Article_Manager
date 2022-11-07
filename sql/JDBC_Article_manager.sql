@@ -25,7 +25,8 @@ CREATE TABLE `member` (
 	loginId VARCHAR(20) NOT NULL,
 	loginPw VARCHAR(50) NOT NULL,
 	`name` VARCHAR(50) NOT NULL,
-	address VARCHAR(100) NOT NULL
+	address VARCHAR(100) NOT NULL,
+	email VARCHAR(100) NOT NULL
 );
 
 #게시물 작성시 작성자의 회원번호를 저장하도록
@@ -207,6 +208,15 @@ loginId = 'test2',
 loginPw = 'test2',
 `name` = '김영희';
 
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test3',
+loginPw = 'test3',
+`name` = '빵',
+address = '대전',
+email = 'nav@nav.com';
+
 #
 SELECT A.*, M.name AS writerName 
 FROM article AS A
@@ -222,6 +232,12 @@ ALTER TABLE article ADD COLUMN hit INT UNSIGNED NOT NULL;
 
 #추천수 기능 추가
 ALTER TABLE article ADD COLUMN rec INT UNSIGNED NOT NULL;
+
+# 주소 추가
+ALTER TABLE `member` ADD COLUMN address INT UNSIGNED NOT NULL;
+
+# 이메일추가
+ALTER TABLE `member` ADD COLUMN email INT UNSIGNED NOT NULL;
 
 UPDATE article 
 SET hit = hit + 1

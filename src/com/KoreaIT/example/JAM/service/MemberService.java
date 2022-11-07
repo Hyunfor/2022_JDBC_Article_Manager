@@ -16,12 +16,13 @@ public class MemberService {
 		return memberDao.isLoginIdDup(loginId);
 	}
 
-	public int doJoin(String loginId, String loginPw, String name, String address) {
-		return memberDao.doJoin(loginId, loginPw, name, address);
+	public int doJoin(String loginId, String loginPw, String name, String address, String email) {
+		return memberDao.doJoin(loginId, loginPw, name, address, email);
 	}
 
 	public Member getMemberByLoginId(String loginId) {
 		return memberDao.getMemberByLoginId(loginId);
 	}
+
 
 }

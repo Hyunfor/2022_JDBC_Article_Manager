@@ -13,7 +13,7 @@ public class MemberDao {
 
 	}
 
-	public int doJoin(String loginId, String loginPw, String name, String address) {
+	public int doJoin(String loginId, String loginPw, String name, String address, String email) {
 
 		SecSql sql = new SecSql();
 		sql.append("INSERT INTO `member`");
@@ -23,6 +23,7 @@ public class MemberDao {
 		sql.append(", loginPw = ?", loginPw);
 		sql.append(", `name` = ?", name);
 		sql.append(", address = ?", address);
+		sql.append(", email = ?", email);
 
 		return DBUtil.insert(Container.conn, sql);
 	}
