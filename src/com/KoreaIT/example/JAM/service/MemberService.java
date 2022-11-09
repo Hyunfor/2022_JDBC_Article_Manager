@@ -24,5 +24,15 @@ public class MemberService {
 		return memberDao.getMemberByLoginId(loginId);
 	}
 
+	public Member getMemberById(int id) {
+		return memberDao.getMemberById(id);
+	}
+
+	public int profileModify(int id, String loginPw, String name, String address, String email) {
+		return memberDao.profileModify(id, loginPw, name, address, email);
+		
+	}
+
+	
 
 }

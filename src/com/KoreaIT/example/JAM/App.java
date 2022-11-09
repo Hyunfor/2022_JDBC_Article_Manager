@@ -71,6 +71,8 @@ public class App {
 			memberController.doLogout(cmd);
 		} else if (cmd.equals("member profile")) {
 			memberController.showProfile(cmd);
+		} else if (cmd.startsWith("member modify ")) {
+			memberController.profileModify(cmd);
 		} else if (cmd.equals("article write")) {
 			articleController.doWrite(cmd);
 		} else if (cmd.startsWith("article detail ")) {

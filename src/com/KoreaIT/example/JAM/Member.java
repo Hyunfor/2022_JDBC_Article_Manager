@@ -5,6 +5,7 @@ import java.util.Map;
 
 public class Member extends Object { // Object - 모든 class의 최상위 class
 	public int id;
+	public int memberId;
 	public LocalDateTime regDate;
 	public LocalDateTime updateDate;
 	public String loginId;

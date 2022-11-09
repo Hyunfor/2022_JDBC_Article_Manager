@@ -1,5 +1,6 @@
 package com.KoreaIT.example.JAM.controller;
 
+import com.KoreaIT.example.JAM.Article;
 import com.KoreaIT.example.JAM.Member;
 import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.service.MemberService;
@@ -184,6 +185,44 @@ public class MemberController extends Controller {
 		System.out.println("주소 : " + Container.session.loginedMember.address);
 
 	}
+	
+	public void profileModify(String cmd) {
+
+		if (Container.session.isLogined() == false) {
+			System.out.println("로그인 후 이용해주세요");
+			return;
+		}
+
+		int id = Integer.parseInt(cmd.split(" ")[2]);
+
+		Member member = memberService.getMemberById(id);
+
+		if (member == null) {
+			System.out.printf("%d번 회원은 존재하지 않습니다\n", id);
+			return;
+		}
+
+		if (member.memberId != Container.session.loginedMemberId) {
+			System.out.println("해당 계정에 대한 권한이 없습니다.");
+			return;
+		}
+		String loginPw = null;
+		System.out.printf("== %d번 프로필 수정 ==\n", id);
+
+		System.out.printf("새 비밀번호 : ");
+		loginPw = sc.nextLine();
+		System.out.printf("이름 변경 : ");
+		String name = sc.nextLine();
+		System.out.printf("새 주소 : ");
+		String address = sc.nextLine();
+		System.out.printf("새 이메일 : ");
+		String email = sc.nextLine();
+
+		memberService.profileModify(id, loginPw, name, address, email);
+
+		System.out.printf("%d번 회원님 정보가 변경 되었습니다\n", id);
+
+	}
 
 	public void doLogout(String cmd) {
 		Container.session.logout();
@@ -191,5 +230,6 @@ public class MemberController extends Controller {
 		System.out.println("로그아웃 되었습니다.");
 
 	}
+
 
 }
