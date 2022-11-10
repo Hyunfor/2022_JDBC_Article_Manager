@@ -2,7 +2,6 @@ package com.KoreaIT.example.JAM.dao;
 
 import java.util.Map;
 
-import com.KoreaIT.example.JAM.Article;
 import com.KoreaIT.example.JAM.Member;
 import com.KoreaIT.example.JAM.container.Container;
 import com.KoreaIT.example.JAM.util.DBUtil;
@@ -72,11 +71,11 @@ public class MemberDao {
 	public Member getMemberById(int id) { // sql 멤버정보 수정에 맡게 변경해야함.
 		SecSql sql = new SecSql();
 
-		sql.append("SELECT A.*, M.name AS writerName");
-		sql.append("FROM article AS A");
+		sql.append("SELECT M.*, M.name AS memberName");
+		sql.append("FROM member AS M");
 		sql.append("INNER JOIN `member` AS M");
-		sql.append("ON A.memberId = M.id");
-		sql.append("WHERE A.id = ?", id);
+		sql.append("ON M.memberId = M.id");
+		sql.append("WHERE M.id = ?", id);
 		// member 하나를 가져와서 진행
 		Map<String, Object> memberMap = DBUtil.selectRow(Container.conn, sql);
 
